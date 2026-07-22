@@ -157,6 +157,26 @@ h2.sec::before{content:"";width:5px;height:18px;background:var(--enji);border-ra
   font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;
   font-family:'Shippori Mincho',serif;
 }
+
+/* ---------- phase chips (route) ---------- */
+.pchips{display:flex;gap:6px;margin:4px 0 14px}
+.pchips button{flex:1;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:7px 2px;font-family:inherit;font-weight:800;font-size:14px;color:var(--sub);cursor:pointer;line-height:1.3}
+.pchips button span{display:block;font-size:9.5px;font-weight:500}
+.pchips button.on{background:var(--enji);border-color:var(--enji);color:#fff}
+.rphase{margin-bottom:6px}
+.rp-title{font-size:15px;font-weight:800;margin:2px 0 2px;font-family:'Shippori Mincho',serif}
+.rp-period{font-size:12px;color:var(--sub);margin-bottom:10px}
+.rgroup{border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.rgroup .gs{font-size:12px;font-weight:700;color:#fff;background:var(--ink);border-radius:5px;padding:1px 10px;display:inline-block;margin-bottom:6px}
+.rgroup.en .gs{background:var(--enji)}
+.ritem{display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.ritem:last-of-type{border-bottom:none}
+.ritem .m{flex:none;font-weight:800;font-size:12px;border-radius:6px;padding:1px 7px;margin-top:2px}
+.ritem .m.new{background:#FDECEF;color:var(--enji)}
+.ritem .m.keep{background:var(--mist);color:var(--sub)}
+.ritem .d{line-height:1.6}
+.ritem .d small{display:block;color:var(--sub);font-size:12px}
+.ranswer{font-size:12.5px;background:#FBF6EA;border:1px solid #EAD9B0;border-radius:8px;padding:7px 11px;margin-top:8px;line-height:1.7}
 footer{font-size:11px;color:var(--sub);text-align:center;padding:20px 16px 8px;line-height:1.8}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chev{transition:none}}
 </style>
@@ -433,69 +453,15 @@ footer{font-size:11px;color:var(--sub);text-align:center;padding:20px 16px 8px;l
 
 <!-- ================= VIEW: ROUTE ================= -->
 <section class="view" id="v-route">
-  <div class="note">凡例：<b>P0〜P4</b>＝フェーズ。1冊を完璧に2〜3周、順番厳守。終わってないのに次へ進まない。</div>
-  <div class="card">
-    <details open>
-      <summary>🇬🇧 英語（最優先・波及効果 最大）<span class="chev">▶</span></summary>
-      <div class="body">
-        <div class="subj en"><span class="sname">単語</span><div class="mat">シス単 or ターゲット1900｜1日100語・毎日<span class="goal">見て1秒で意味｜P0〜継続</span></div><div class="mat" style="margin-top:6px">上乗せ：速単上級 or パス単準1｜1日50語<span class="goal">早慶語彙｜P2〜</span></div></div>
-        <div class="subj en"><span class="sname">文法</span><div class="mat">大岩の英文法｜2〜3週で1周<span class="goal">中学〜高1の穴埋め｜P0</span></div><div class="mat" style="margin-top:6px">Vintage／Next Stage｜1冊3周<span class="goal">文法・語法を演習で固める｜P1〜2</span></div></div>
-        <div class="subj en"><span class="sname">解釈</span><div class="mat">入門解釈70 → 基礎解釈100 → ポレポレ（or 透視図）<span class="goal">長文が読めない原因はここ。1日2〜3題ずつ｜P0→P1→P2</span></div></div>
-        <div class="subj en"><span class="sname">長文</span><div class="mat">The Rules 1→2（週3〜4題）→ 3→4 or やっておきたい500→700（音読復習）<span class="goal">標準→早慶レベル｜P1〜3</span></div></div>
-        <div class="subj en"><span class="sname">英作文</span><div class="mat">大矢実況中継 or 竹岡｜1日1テーマ＋添削<span class="goal">総合問題で英作文が出る→必須｜P2〜3</span></div></div>
-        <div class="subj en"><span class="sname">リスニング</span><div class="mat">きめる!共テL＋毎日音声15〜20分<span class="goal">共テL8割｜P2〜4</span></div></div>
-        <p><b>到達目標：</b>共テR/L 8.5割／早慶長文を読み切る／英作文が書ける</p>
-      </div>
-    </details>
+  <div class="note">フェーズを選ぶと、<b>その期間に机に置く本が全部</b>出る。<span class="star">★新しく始める</span>／<span class="cont">▶前の本をそのまま続ける</span>（買い直し不要）。</div>
+  <div class="pchips" id="pchips">
+    <button data-p="0">P0<span>高2夏</span></button>
+    <button data-p="1">P1<span>高2後半</span></button>
+    <button data-p="2">P2<span>高3前半</span></button>
+    <button data-p="3">P3<span>高3夏秋</span></button>
+    <button data-p="4">P4<span>直前</span></button>
   </div>
-  <div style="height:10px"></div>
-  <div class="card">
-    <details>
-      <summary>🧮 数Ⅰ・A（必須・共テ8割）<span class="chev">▶</span></summary>
-      <div class="body">
-        <div class="subj"><span class="sname">基礎</span><div class="mat">やさしい高校数学ⅠA｜つまずき単元を集中<span class="goal">教科書レベルの穴埋め｜P0</span></div></div>
-        <div class="subj"><span class="sname">典型</span><div class="mat">基礎問題精講ⅠA｜1日5問・反復<span class="goal">典型問題を解ける｜P1</span></div></div>
-        <div class="subj"><span class="sname">実戦</span><div class="mat">きめる!共テ数学＋過去問｜週2〜3セット<span class="goal">時間内に8割｜P2〜4</span></div></div>
-        <p>⚠️「データの分析」は丁寧に（総合問題の図表読み取りに直結）。数ⅡBCは政経には不要。</p>
-      </div>
-    </details>
-  </div>
-  <div style="height:10px"></div>
-  <div class="card">
-    <details>
-      <summary>📖 国語（共テ8割・記述は総合問題に直結）<span class="chev">▶</span></summary>
-      <div class="body">
-        <div class="subj"><span class="sname">現代文</span><div class="mat">ことばはちからJr → アクセス基本編（週3題）→ 開発講座（週2題・記述強化）→ 共テ演習<span class="goal">P0→P1→P2→P3〜4</span></div></div>
-        <div class="subj"><span class="sname">古文</span><div class="mat">古文単語315（毎日スキマ）→ 富井の古典文法 → 古文上達45（週3題）→ 共テ演習<span class="goal">P0→P1→P2→P3〜4</span></div></div>
-        <div class="subj"><span class="sname">漢文</span><div class="mat">漢文早覚え速答法｜2〜3週で集中<span class="goal">共テ漢文を短期攻略｜P2</span></div></div>
-      </div>
-    </details>
-  </div>
-  <div style="height:10px"></div>
-  <div class="card">
-    <details>
-      <summary>🌏 社会＝歴史公民（武器・共テ9割）<span class="chev">▶</span></summary>
-      <div class="body">
-        <p>まず共テで使う1科目を確定（世界史探究／日本史探究／政治・経済など）。</p>
-        <div class="subj"><span class="sname">理解</span><div class="mat">通史・分野本（蔭山の政経／ナビゲーター世界史／実況中継 日本史 等）｜高2中に1周<span class="goal">P1</span></div></div>
-        <div class="subj"><span class="sname">暗記</span><div class="mat">東進一問一答｜毎日反復（早稲田志望は低頻度語まで）<span class="goal">P1〜継続</span></div></div>
-        <div class="subj"><span class="sname">演習</span><div class="mat">用語集＝常時参照／共テ過去問・予想で9割を外さない<span class="goal">P3〜4</span></div></div>
-        <p>政経選択なら時事＋用語集が鍵。ニュース習慣は総合問題にも効く。</p>
-      </div>
-    </details>
-  </div>
-  <div style="height:10px"></div>
-  <div class="card">
-    <details>
-      <summary>🏛 総合問題（独自100点・高3夏から本格化）<span class="chev">▶</span></summary>
-      <div class="body">
-        <p><b>形式：</b>120分で日本語長文・英語長文・英作文の3題。統計図表・データ分析・推論・論述。日英の情報を統合して考える力が核心。</p>
-        <div class="subj"><span class="sname">主教材</span><div class="mat">公式サンプル＋過去問（河合塾の解答例も活用）｜P2で眺める→P3で年度順→P4で120分実戦</div></div>
-        <div class="subj"><span class="sname">土台</span><div class="mat">英語ルート（長文＋英作文）／開発講座の記述／数ⅠA「データの分析」／社会の背景知識＋時事<span class="goal">全部ここに合流する</span></div></div>
-        <p>⚠️ 記述は<b>必ず第三者の添削</b>（学校の先生・塾）。独学で点数化しづらい唯一の領域。</p>
-      </div>
-    </details>
-  </div>
+  <div id="routeBody"></div>
 </section>
 
 <!-- ================= VIEW: RULE ================= -->
@@ -549,7 +515,7 @@ footer{font-size:11px;color:var(--sub);text-align:center;padding:20px 16px 8px;l
 </section>
 
 </main>
-<footer>KOROTA'S ROAD TO WASEDA ｜ 2026.6 → 2028.2<br>チェックの進捗はこの端末に自動保存される</footer>
+<footer>KOROTA'S ROAD TO WASEDA ｜ 2026.6 → 2028.2<br>チェックの進捗は自動保存される</footer>
 
 <script>
 // ---- countdown (共テ想定: 2028-01-15) ----
@@ -595,6 +561,106 @@ document.querySelectorAll('#f0weeks li').forEach(li=>{
     li.innerHTML = '📍 ' + li.innerHTML;
   }
 });
+
+
+// ---- route: phase-first material listing ----
+const R_NEW='new', R_KEEP='keep';
+const routeData = {
+ 0:{title:'フェーズ0：基礎立て直し',period:'2026年6〜8月（高2の夏）',groups:[
+  {n:'英語',en:1,items:[
+   [R_NEW,'システム英単語','毎日100語。受験まで使う唯一のメイン単語帳'],
+   [R_NEW,'大岩のいちばんはじめの英文法','2〜3週で1周→2周目総点検'],
+   [R_NEW,'入門英文解釈の技術70','1日2〜3文。夏で1周']],
+   ans:'単語帳はシス単だけ。これを最後まで育てる。'},
+  {n:'数ⅠA',items:[[R_NEW,'やさしい高校数学Ⅰ・A','つまずき単元を特定して集中']]},
+  {n:'国語',items:[
+   [R_NEW,'ことばはちからジュニア','2〜3週で1周（論理で読む型）'],
+   [R_NEW,'古文単語315','毎日スキマ時間で5〜10語']]},
+  {n:'社会',items:[[R_KEEP,'（教材なし）','得意分野を維持。共テ形式を一度解いて実測だけ']]}
+ ]},
+ 1:{title:'フェーズ1：基礎完成',period:'2026年9月〜2027年3月（高2後半）',groups:[
+  {n:'英語',en:1,items:[
+   [R_KEEP,'システム英単語','同じ本を継続。新しい単語帳は買わない'],
+   [R_NEW,'Vintage（or Next Stage）','網羅文法。1冊を3周'],
+   [R_NEW,'基礎英文解釈の技術100','解釈70が終わったらこれ。1日3文'],
+   [R_NEW,'The Rules 1 → 2','長文デビュー。週3〜4題'],
+   [R_NEW,'英検2級 過去問','12月受験目標']],
+   ans:'❓「P1の単語帳は？」→ シス単の続き。大岩・解釈70は終わったら復習用に残す。'},
+  {n:'数ⅠA',items:[[R_NEW,'基礎問題精講Ⅰ・A','1日5問・反復（やさしい高校数学は辞書役に）']]},
+  {n:'国語',items:[
+   [R_NEW,'現代文へのアクセス 基本編','週3題'],
+   [R_NEW,'富井の古典文法（＋ステップアップノート）','2〜3週で1周'],
+   [R_KEEP,'古文単語315','継続']]},
+  {n:'社会',items:[
+   [R_NEW,'通史・分野本（蔭山の政経／ナビゲーター等）','高2中に1周'],
+   [R_NEW,'東進 一問一答','毎日少しずつ反復'],
+   [R_NEW,'用語集','辞書として常備']]},
+  {n:'総合問題',items:[[R_KEEP,'公式サンプル','「眺める」だけ。まだ解かない']]}
+ ]},
+ 2:{title:'フェーズ2：早慶レベルへ',period:'2027年4〜7月（高3前半）',groups:[
+  {n:'英語',en:1,items:[
+   [R_KEEP,'システム英単語','維持（週で総復習）'],
+   [R_NEW,'速読英単語 上級編（or パス単準1級）','早慶語彙を上乗せ。1日50語'],
+   [R_NEW,'速読英熟語（or 解体英熟語)','1日見開き数ページ'],
+   [R_NEW,'ポレポレ（or 透視図）','解釈の最終段。1日2題'],
+   [R_NEW,'The Rules 3 → 4（or やっておきたい500→700）','早慶長文＋音読復習'],
+   [R_NEW,'大矢英作文 実況中継（or 竹岡）','1日1テーマ＋添削'],
+   [R_NEW,'きめる! 共通テスト リスニング','毎日15〜20分'],
+   [R_NEW,'英検準1級 過去問','6月挑戦']],
+   ans:'❓「P2の単語帳は？」→ シス単＋上級1冊の2本立て。ここで初めて単語帳が増える。'},
+  {n:'数ⅠA',items:[
+   [R_NEW,'きめる! 共通テスト数学ⅠA','＋共テ過去問を週2〜3セット'],
+   [R_KEEP,'基礎問題精講','間違えた分野の復習用']]},
+  {n:'国語',items:[
+   [R_NEW,'現代文読解力の開発講座','週2題・記述強化'],
+   [R_NEW,'古文上達 基礎編45','週3題'],
+   [R_NEW,'漢文早覚え速答法','2〜3週で集中']]},
+  {n:'社会',items:[
+   [R_KEEP,'東進 一問一答','継続'],
+   [R_NEW,'共テ過去問・予想問題','9割へ']]},
+  {n:'総合問題',items:[[R_NEW,'公式サンプル＋過去問','週1で着手（河合の解答例活用）']]}
+ ]},
+ 3:{title:'フェーズ3：総合問題 本格化',period:'2027年8〜10月（高3夏〜秋）',groups:[
+  {n:'英語',en:1,items:[
+   [R_KEEP,'シス単＋上級単語帳','維持復習'],
+   [R_KEEP,'早慶長文（Rules4／やっておきたい700）','継続'],
+   [R_KEEP,'英作文＋添削','継続'],
+   [R_KEEP,'ポレポレ','苦手構文の復習用']],
+   ans:'❓「P3で新しく買う英語の本は？」→ なし。手持ちを回す時期。'},
+  {n:'共テ演習',items:[
+   [R_KEEP,'数ⅠA・国語・社会の共テ過去問／予想問題','演習ベースで8〜9割を安定させる']]},
+  {n:'総合問題',items:[
+   [R_NEW,'過去問（年度順）','週1〜2本＋必ず第三者の添削']]}
+ ]},
+ 4:{title:'フェーズ4：仕上げ',period:'2027年11月〜2028年1月（直前期）',groups:[
+  {n:'共テ全科目',items:[
+   [R_NEW,'共テ予想問題パック（各社）','週1セットで通し演習＋即日復習'],
+   [R_KEEP,'過去問','失点分野の潰し込み']]},
+  {n:'総合問題',items:[
+   [R_KEEP,'過去問','120分の時間制限で実戦→記述の最終調整']]},
+  {n:'英語',en:1,items:[[R_KEEP,'シス単＋上級','毎日の維持だけは最後まで']]}
+ ]}
+};
+function renderRoute(p){
+  const d = routeData[p];
+  let h = `<div class="rphase"><div class="rp-title">${d.title}</div><div class="rp-period">${d.period}</div>`;
+  d.groups.forEach(g=>{
+    h += `<div class="rgroup${g.en?' en':''}"><span class="gs">${g.n}</span>`;
+    g.items.forEach(it=>{
+      const m = it[0]===R_NEW ? '<span class="m new">★新規</span>' : '<span class="m keep">▶継続</span>';
+      h += `<div class="ritem">${m}<div class="d"><b>${it[1]}</b><small>${it[2]}</small></div></div>`;
+    });
+    if(g.ans) h += `<div class="ranswer">${g.ans}</div>`;
+    h += `</div>`;
+  });
+  h += `</div>`;
+  document.getElementById('routeBody').innerHTML = h;
+  document.querySelectorAll('#pchips button').forEach(b=>b.classList.toggle('on', +b.dataset.p===p));
+}
+document.querySelectorAll('#pchips button').forEach(b=>{
+  b.addEventListener('click',()=>renderRoute(+b.dataset.p));
+});
+renderRoute(Math.min(cur.i,4));
 
 // ---- tabs ----
 document.querySelectorAll('nav button').forEach(btn=>{
