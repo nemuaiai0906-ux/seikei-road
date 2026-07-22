@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>早稲田政経 合格ロードマップ</title>
+<meta name="theme-color" content="#8C1D2F">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="政経ロード">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --enji:#8C1D2F;        /* 早稲田・臙脂 */
+  --enji-deep:#6E1524;
+  --ink:#2A2226;
+  --paper:#FFFFFF;
+  --mist:#F5F2F0;
+  --line:#E5DFDC;
+  --gold:#B8862B;        /* 模試・本番マーカー */
+  --leaf:#2E7D5B;        /* 達成・チェック */
+  --sub:#7A6F72;
+  --radius:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Zen Kaku Gothic New',system-ui,sans-serif;
+  background:var(--paper);color:var(--ink);
+  font-size:15px;line-height:1.75;
+  padding-bottom:56px;
+}
+.disp{font-family:'Shippori Mincho',serif;font-weight:800}
+
+/* ---------- header ---------- */
+header{
+  background:linear-gradient(160deg,var(--enji) 0%,var(--enji-deep) 100%);
+  color:#fff;padding:26px 20px 22px;
+}
+header .eyebrow{font-size:11px;letter-spacing:.22em;opacity:.85}
+header h1{font-size:24px;line-height:1.35;margin-top:6px}
+header h1 span{display:block;font-size:13px;font-weight:600;opacity:.9;margin-top:4px;font-family:'Zen Kaku Gothic New',sans-serif}
+.count{display:flex;gap:10px;margin-top:16px}
+.count .box{flex:1;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:9px 8px;text-align:center}
+.count .num{font-size:21px;font-weight:800;font-family:'Shippori Mincho',serif;line-height:1.2}
+.count .lbl{font-size:10px;opacity:.85;margin-top:2px}
+
+/* ---------- tabs ---------- */
+nav{
+  position:sticky;top:0;z-index:20;background:var(--paper);
+  display:flex;border-bottom:2px solid var(--line);
+}
+nav button{
+  flex:1;padding:12px 4px;font-size:13px;font-weight:700;
+  background:none;border:none;color:var(--sub);cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  font-family:inherit;
+}
+nav button.on{color:var(--enji);border-bottom-color:var(--enji)}
+main{padding:18px 16px 30px;max-width:640px;margin:0 auto}
+.view{display:none}.view.on{display:block}
+
+/* ---------- now card ---------- */
+.now{
+  background:var(--enji);color:#fff;border-radius:var(--radius);
+  padding:16px 18px;margin-bottom:20px;
+  box-shadow:0 6px 18px rgba(140,29,47,.25);
+}
+.now .tag{font-size:11px;letter-spacing:.15em;opacity:.9}
+.now .phase{font-size:18px;font-weight:800;margin-top:2px;font-family:'Shippori Mincho',serif}
+.now .todo{font-size:13px;margin-top:8px;background:rgba(255,255,255,.13);border-radius:8px;padding:8px 12px;line-height:1.7}
+
+/* ---------- quest chain ---------- */
+.chain{position:relative;margin-left:8px}
+.chain::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.stage{position:relative;padding:0 0 14px 36px}
+.stage .dot{
+  position:absolute;left:2px;top:6px;width:20px;height:20px;border-radius:50%;
+  background:var(--paper);border:2.5px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--sub);font-weight:700;
+}
+.stage.here .dot{border-color:var(--enji);background:var(--enji);color:#fff}
+.stage.exam .dot{border-color:var(--gold);color:var(--gold)}
+.stage.here .card{border-color:var(--enji);box-shadow:0 4px 14px rgba(140,29,47,.12)}
+.here-badge{display:inline-block;background:var(--enji);color:#fff;font-size:10px;font-weight:700;border-radius:99px;padding:2px 10px;letter-spacing:.1em;margin-bottom:4px}
+
+/* ---------- cards & accordions ---------- */
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:var(--radius);overflow:hidden}
+details{border-bottom:1px solid var(--line)}
+details:last-child{border-bottom:none}
+summary{
+  list-style:none;cursor:pointer;padding:13px 16px;
+  display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;
+}
+summary::-webkit-details-marker{display:none}
+summary .chev{margin-left:auto;color:var(--sub);transition:transform .2s;font-size:12px}
+details[open] summary .chev{transform:rotate(90deg)}
+summary .period{font-size:11px;font-weight:500;color:var(--sub);display:block}
+.body{padding:2px 16px 16px;font-size:14px}
+.body p{margin:8px 0}
+
+.pri{background:var(--mist);border-left:3px solid var(--enji);border-radius:0 8px 8px 0;padding:9px 12px;font-size:13px;margin:6px 0 12px;font-weight:500}
+
+.subj{margin:10px 0}
+.subj .sname{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--ink);border-radius:5px;padding:1px 9px;margin-bottom:3px}
+.subj.en .sname{background:var(--enji)}
+.subj .mat{font-size:13.5px}
+.subj .goal{font-size:12px;color:var(--sub);margin-top:2px}
+.star{color:var(--enji);font-weight:700}
+.cont{color:var(--sub);font-weight:700}
+
+.week{background:var(--mist);border-radius:10px;padding:12px 14px;margin:12px 0}
+.week .wt{font-size:12px;font-weight:700;color:var(--enji);letter-spacing:.08em;margin-bottom:6px}
+.week ul{list-style:none}
+.week li{font-size:13px;padding:4px 0;border-bottom:1px dashed var(--line)}
+.week li:last-child{border-bottom:none}
+.week li b{display:inline-block;width:2.2em;color:var(--enji)}
+
+.blocks{margin:12px 0}
+.blocks .bt{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--sub);margin-bottom:4px}
+.blocks li{font-size:13px;margin:5px 0 5px 1.2em}
+
+.moshi{display:flex;gap:8px;align-items:flex-start;background:#FBF6EA;border:1px solid #EAD9B0;border-radius:10px;padding:9px 12px;font-size:12.5px;margin-top:12px}
+.moshi .ic{color:var(--gold);font-weight:800}
+
+.checks{margin-top:12px}
+.checks .ct{font-size:12px;font-weight:700;color:var(--leaf);letter-spacing:.08em;margin-bottom:4px}
+.checks label{display:flex;gap:9px;align-items:flex-start;font-size:13px;padding:4px 0;cursor:pointer}
+.checks input{margin-top:5px;accent-color:var(--leaf);width:15px;height:15px;flex:none}
+
+/* ---------- score table ---------- */
+.score{margin:14px 0}
+.score .row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.score .row:last-child{border-bottom:none;font-weight:800}
+.score .nm{flex:1}
+.score .bar{flex:1.1;height:8px;background:var(--mist);border-radius:99px;overflow:hidden}
+.score .bar i{display:block;height:100%;background:var(--enji);border-radius:99px}
+.score .pt{width:64px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+
+.note{font-size:12px;color:var(--sub);background:var(--mist);border-radius:10px;padding:10px 13px;margin:12px 0}
+h2.sec{font-size:16px;margin:26px 0 10px;display:flex;align-items:center;gap:8px}
+h2.sec::before{content:"";width:5px;height:18px;background:var(--enji);border-radius:2px}
+
+.kentei{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.kentei .k{border:1.5px solid var(--line);border-radius:10px;padding:10px 13px;font-size:13px}
+.kentei .k b.no{color:var(--sub)}
+.kentei .k b.yes{color:var(--enji)}
+
+.rule{counter-reset:r;margin:8px 0}
+.rule li{list-style:none;counter-increment:r;position:relative;padding:6px 0 6px 34px;font-size:13.5px}
+.rule li::before{
+  content:counter(r);position:absolute;left:0;top:7px;
+  width:22px;height:22px;border-radius:50%;background:var(--enji);color:#fff;
+  font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  font-family:'Shippori Mincho',serif;
+}
+footer{font-size:11px;color:var(--sub);text-align:center;padding:20px 16px 8px;line-height:1.8}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chev{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">KOROTA'S ROAD TO WASEDA</div>
+  <h1 class="disp">早稲田政経 合格ロードマップ<span>共通テスト 2028年1月 ／ 総合問題 2028年2月</span></h1>
+  <div class="count">
+    <div class="box"><div class="num" id="dDays">—</div><div class="lbl">共テまで（日）</div></div>
+    <div class="box"><div class="num" id="dWeeks">—</div><div class="lbl">残り週数</div></div>
+    <div class="box"><div class="num">160<span style="font-size:12px">/200</span></div><div class="lbl">目標点（8割）</div></div>
+  </div>
+</header>
+
+<nav>
+  <button class="on" data-v="map">ロードマップ</button>
+  <button data-v="week">週メニュー</button>
+  <button data-v="route">教材ルート</button>
+  <button data-v="rule">目標・ルール</button>
+</nav>
+
+<main>
+
+<!-- ================= VIEW: MAP ================= -->
+<section class="view on" id="v-map">
+
+  <div class="now">
+    <div class="tag">📍 いまここ</div>
+    <div class="phase" id="nowPhase">読み込み中…</div>
+    <div class="todo" id="nowTodo"></div>
+  </div>
+
+  <div class="chain">
+
+    <!-- F0 -->
+    <div class="stage" data-phase="0">
+      <div class="dot">0</div>
+      <div class="card">
+        <details>
+          <summary><span>フェーズ0：基礎立て直し<span class="period">2026年6〜8月（高2の夏）</span></span><span class="chev">▶</span></summary>
+          <div class="body">
+            <div class="pri">最優先：英語の土台（単語・文法・解釈）＋数ⅠA基礎＋現代文の読み方。教材はこれだけ、広げない。</div>
+            <div class="subj en"><span class="sname">英語</span><div class="mat"><span class="star">★</span>システム英単語（毎日100語）／<span class="star">★</span>大岩の英文法（2〜3週で1周）／<span class="star">★</span>入門英文解釈70（1日2〜3文）</div><div class="goal">→ 文法一周＋単語習慣化＋1文を構造で読める</div></div>
+            <div class="subj"><span class="sname">数ⅠA</span><div class="mat"><span class="star">★</span>やさしい高校数学Ⅰ・A（つまずき単元を集中）</div><div class="goal">→ 教科書レベルの穴を埋める</div></div>
+            <div class="subj"><span class="sname">国語</span><div class="mat"><span class="star">★</span>ことばはちからジュニア／<span class="star">★</span>古文単語315（スキマ時間）</div><div class="goal">→ 「論理で読む」型の入り口</div></div>
+            <div class="subj"><span class="sname">社会</span><div class="mat"><span class="cont">▶</span>得意分野を維持＋共テ形式で一度実測</div><div class="goal">→ 現在地を数値で把握</div></div>
+            <div class="checks"><div class="ct">✓ 夏の到達チェック（8月末）</div>
+              <label><input type="checkbox" data-k="f0c1"><span>大岩 英文法 1周＋総点検</span></label>
+              <label><input type="checkbox" data-k="f0c2"><span>シス単 Stage1〜2 が即答できる</span></label>
+              <label><input type="checkbox" data-k="f0c3"><span>解釈70 を1周し SVOC が振れる</span></label>
+              <label><input type="checkbox" data-k="f0c4"><span>数ⅠA 基礎を一通り</span></label>
+              <label><input type="checkbox" data-k="f0c5"><span>現代文「論理で読む」に触れた</span></label>
+            </div>
+            <div class="moshi"><span class="ic">🗓</span><span>7月 進研模試＝現在地の測定（英国数 50前後でOK、社会は実測）</span></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- F1 -->
+    <div class="stage" data-phase="1">
+      <div class="dot">1</div>
+      <div class="card">
+        <details>
+          <summary><span>フェーズ1：基礎完成<span class="period">2026年9月〜2027年3月（高2後半）</span></span><span class="chev">▶</span></summary>
+          <div class="body">
+            <div class="pri">最優先：解釈→長文をつなぐ／全科目の基礎完成／英検2級。</div>
+            <div class="subj en"><span class="sname">英語</span><div class="mat"><span class="cont">▶</span>シス単／<span class="star">★</span>Vintage 3周／<span class="star">★</span>基礎解釈100／<span class="star">★</span>The Rules 1→2（週3〜4題）／<span class="star">★</span>英検2級</div><div class="goal">→ 標準長文を読み切る</div></div>
+            <div class="subj"><span class="sname">数ⅠA</span><div class="mat"><span class="star">★</span>基礎問題精講（1日5問・反復）</div><div class="goal">→ 典型問題を解ける</div></div>
+            <div class="subj"><span class="sname">国語</span><div class="mat"><span class="star">★</span>現代文アクセス基本編／<span class="star">★</span>古典文法／<span class="cont">▶</span>古文単語</div><div class="goal">→ 標準読解＋古文の文法土台</div></div>
+            <div class="subj"><span class="sname">社会</span><div class="mat"><span class="star">★</span>通史・分野本を一周／<span class="star">★</span>東進一問一答（毎日）／用語集の習慣</div><div class="goal">→ 9割が見える所まで</div></div>
+            <div class="subj"><span class="sname">総合</span><div class="mat"><span class="cont">▶</span>サンプル問題を「眺める」だけ（まだ解かない）</div><div class="goal">→ 形式を知る</div></div>
+            <div class="checks"><div class="ct">✓ 高2末チェック</div>
+              <label><input type="checkbox" data-k="f1c1"><span>英国数 進研57〜60／英検2級 取得</span></label>
+              <label><input type="checkbox" data-k="f1c2"><span>Vintage・基礎解釈100・基礎問精講ⅠA 完了</span></label>
+              <label><input type="checkbox" data-k="f1c3"><span>古典文法・通史一周 完了</span></label>
+              <label><input type="checkbox" data-k="f1c4"><span>共テ過去問で6割が見える</span></label>
+            </div>
+            <div class="moshi"><span class="ic">🗓</span><span>11月・1月 進研模試｜目標 英国数 53 → 57〜60</span></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- F2 -->
+    <div class="stage" data-phase="2">
+      <div class="dot">2</div>
+      <div class="card">
+        <details>
+          <summary><span>フェーズ2：早慶レベルへ橋渡し<span class="period">2027年4〜7月（高3前半）</span></span><span class="chev">▶</span></summary>
+          <div class="body">
+            <div class="pri">最優先：解釈・長文の引き上げ／英作文開始／総合問題に着手／英検準1級挑戦。</div>
+            <div class="subj en"><span class="sname">英語</span><div class="mat"><span class="star">★</span>ポレポレ／<span class="star">★</span>The Rules 3→4／<span class="star">★</span>英作文（大矢 or 竹岡）＋添削／<span class="star">★</span>熟語／<span class="cont">▶</span>上級単語／<span class="star">★</span>共テリスニング／<span class="star">★</span>準1級</div><div class="goal">→ 早慶長文を読み切る＋英作文の型</div></div>
+            <div class="subj"><span class="sname">数ⅠA</span><div class="mat"><span class="star">★</span>きめる!共テ数学＋過去問演習（週2〜3）</div><div class="goal">→ 共テ8割が見える</div></div>
+            <div class="subj"><span class="sname">国語</span><div class="mat"><span class="star">★</span>開発講座／<span class="star">★</span>古文上達45／<span class="star">★</span>漢文早覚え</div><div class="goal">→ 記述力＋古漢の仕上げ</div></div>
+            <div class="subj"><span class="sname">社会</span><div class="mat"><span class="cont">▶</span>一問一答＋共テ演習で9割へ</div><div class="goal">→ 共テ9割ライン</div></div>
+            <div class="subj"><span class="sname">総合</span><div class="mat"><span class="star">★</span>過去問・公式サンプルに着手（週1）</div><div class="goal">→ 何を問われるか掴む</div></div>
+            <div class="checks"><div class="ct">✓ 夏前チェック</div>
+              <label><input type="checkbox" data-k="f2c1"><span>進研60〜63／河合でも判定が動く</span></label>
+              <label><input type="checkbox" data-k="f2c2"><span>ポレポレ・開発講座・古文上達・漢文 完了</span></label>
+              <label><input type="checkbox" data-k="f2c3"><span>英作文の添削サイクルが回っている</span></label>
+              <label><input type="checkbox" data-k="f2c4"><span>総合問題の要求が掴めた</span></label>
+            </div>
+            <div class="moshi"><span class="ic">🗓</span><span>5〜7月 進研＋河合全統（河合で"本当の現在地"）／6月 準1級</span></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- F3 -->
+    <div class="stage" data-phase="3">
+      <div class="dot">3</div>
+      <div class="card">
+        <details>
+          <summary><span>フェーズ3：総合問題 本格化<span class="period">2027年8〜10月（高3夏〜秋）</span></span><span class="chev">▶</span></summary>
+          <div class="body">
+            <div class="pri">最優先：総合問題の年度別演習＋添削／共テ8割を安定させる。</div>
+            <div class="subj en"><span class="sname">英語</span><div class="mat"><span class="cont">▶</span>早慶長文／<span class="cont">▶</span>添削英作文／<span class="cont">▶</span>単語・解釈の維持</div><div class="goal">→ 安定して読み切る</div></div>
+            <div class="subj"><span class="sname">共テ</span><div class="mat"><span class="cont">▶</span>数ⅠA・国語・社会を演習ベースで回す</div><div class="goal">→ 数8割／国8割／社9割 安定</div></div>
+            <div class="subj"><span class="sname">総合</span><div class="mat"><span class="star">★</span>過去問を年度順に演習 → <b>必ず第三者の添削</b>／日英読み替えトレ</div><div class="goal">→ 7割が見える</div></div>
+            <div class="checks"><div class="ct">✓ 秋チェック</div>
+              <label><input type="checkbox" data-k="f3c1"><span>共テ8割が安定</span></label>
+              <label><input type="checkbox" data-k="f3c2"><span>総合問題で7割が見える</span></label>
+              <label><input type="checkbox" data-k="f3c3"><span>進研63〜67／早大型模試で立ち位置把握</span></label>
+            </div>
+            <div class="moshi"><span class="ic">🗓</span><span>河合 全統＋秋に早大型 冠模試（早大入試プレ等）を1本</span></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- F4 -->
+    <div class="stage" data-phase="4">
+      <div class="dot">4</div>
+      <div class="card">
+        <details>
+          <summary><span>フェーズ4：仕上げ<span class="period">2027年11月〜2028年1月（直前期）</span></span><span class="chev">▶</span></summary>
+          <div class="body">
+            <div class="pri">最優先：共テ演習の量を回す／総合問題を120分の時間制限で実戦。</div>
+            <div class="subj"><span class="sname">共テ</span><div class="mat"><span class="cont">▶</span>予想問題・過去問を週単位で通し演習＋即日復習</div><div class="goal">→ 本番の得点を安定（8.5割）</div></div>
+            <div class="subj"><span class="sname">総合</span><div class="mat"><span class="star">★</span>120分実戦演習 → 記述の最終調整</div><div class="goal">→ 7〜7.5割で固める</div></div>
+            <div class="subj"><span class="sname">全体</span><div class="mat"><span class="cont">▶</span>失点パターンの最終潰し込み／生活リズムを本番モードへ</div><div class="goal">→ 取りこぼしゼロへ</div></div>
+            <div class="moshi"><span class="ic">🗓</span><span>共通テスト模試で本番リズム作り</span></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 本番 -->
+    <div class="stage exam" data-phase="5">
+      <div class="dot">🏆</div>
+      <div class="card"><details><summary><span class="disp">本番<span class="period">2028年1月 共通テスト → 2月 総合問題</span></span><span class="chev">▶</span></summary>
+        <div class="body"><p>共テ後（1月下旬〜2月）は総合問題に全振りで最終仕上げ。積んできた英語力・記述力・社会の知識をそのままぶつける。</p></div>
+      </details></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= VIEW: WEEK ================= -->
+<section class="view" id="v-week">
+  <h2 class="sec">1日の組み方の原則</h2>
+  <ol class="rule">
+    <li><b>英語は毎日</b>（単語＋もう1つ）。1日も空けない。</li>
+    <li>1日＝英語2コマ＋他科目1〜2コマが基本。</li>
+    <li>平日2〜3時間、休日・長期休み5〜7時間。</li>
+    <li>週の最終日は「間違えた所だけ」復習日。</li>
+  </ol>
+
+  <h2 class="sec">フェーズ0の週型＋週別目標（いまここ）</h2>
+  <div class="week"><div class="wt">毎週まわす型</div>
+    <ul>
+      <li><b>月</b>英単語100 ＋ 大岩文法 ＋ 数ⅠA</li>
+      <li><b>火</b>英単語100 ＋ 解釈70（2〜3文）＋ 現代文</li>
+      <li><b>水</b>英単語100 ＋ 大岩文法 ＋ 数ⅠA</li>
+      <li><b>木</b>英単語100 ＋ 解釈70（2〜3文）＋ 古文単語まとめ</li>
+      <li><b>金</b>英単語100 ＋ 大岩文法 ＋ 現代文</li>
+      <li><b>土</b>英単語100 ＋ 解釈70復習 ＋ 数ⅠA＆社会（共テ実測）</li>
+      <li><b>日</b>その週の復習日（間違えた所の解き直し）</li>
+    </ul>
+  </div>
+  <div class="blocks"><div class="bt">週別の進行目標（★＝今週あたり）</div>
+    <ul id="f0weeks">
+      <li data-range="2026-06-15,2026-06-28"><b>Week1〜2（6月後半）</b>：大岩 L1〜10／シス単 Stage1着手／解釈70 例題1〜10／数ⅠA「数と式」</li>
+      <li data-range="2026-06-29,2026-07-12"><b>Week3〜4（7月前半）</b>：大岩 L11〜20／シス単 Stage1完了→2周目／解釈70 11〜25／数ⅠA「集合・命題／2次関数」前半／現代文 前半</li>
+      <li data-range="2026-07-13,2026-07-26"><b>Week5〜6（7月後半・夏休み突入）</b>：大岩 L21〜30（1周完了）／シス単 Stage2着手／解釈70 26〜45／数ⅠA「2次関数」後半・「図形と計量」／現代文 後半</li>
+      <li data-range="2026-07-27,2026-08-09"><b>Week7〜8（8月前半）</b>：大岩 2周目総点検／シス単 Stage1〜2定着／解釈70 46〜60／数ⅠA「データの分析／場合の数・確率」</li>
+      <li data-range="2026-08-10,2026-08-31"><b>Week9〜11（8月後半）</b>：解釈70 61〜70（1周完了）→苦手解き直し／シス単 即答レベル／数ⅠA「確率／整数・図形」で基礎一通り</li>
+    </ul>
+  </div>
+
+  <h2 class="sec">フェーズ1の週型（高2後半）</h2>
+  <div class="week"><div class="wt">毎週まわす型</div>
+    <ul>
+      <li><b>月</b>単語＋熟語 ＋ Vintage ＋ 基礎問精講ⅠA</li>
+      <li><b>火</b>単語 ＋ 基礎解釈100 ＋ 現代文アクセス</li>
+      <li><b>水</b>単語 ＋ 長文1題 ＋ 数ⅠA</li>
+      <li><b>木</b>単語 ＋ 基礎解釈100 ＋ 古典文法</li>
+      <li><b>金</b>単語 ＋ Vintage ＋ 社会（通史＋一問一答）</li>
+      <li><b>土</b>単語 ＋ 長文1題＆英検対策 ＋ 数ⅠA＆社会</li>
+      <li><b>日</b>復習日 ＋ 週1で英検過去問</li>
+    </ul>
+  </div>
+  <div class="blocks"><div class="bt">2週ごとのブロック目標</div>
+    <ul>
+      <li><b>9月</b>：Vintage着手／解釈100 例題1〜30／The Rules1開始／基礎問（数と式・2次関数〜図形と計量）</li>
+      <li><b>10月</b>：Vintage（関係詞〜準動詞）／解釈100 31〜60／Rules1完了→2へ／古典文法 用言・助動詞／基礎問（場合の数・確率）</li>
+      <li><b>11月</b>：Vintage 1周→2周目／解釈100 61〜90／Rules2／基礎問（データの分析・整数）／進研模試</li>
+      <li><b>12月</b>：解釈100 完了／通史加速／冬休みに Vintage総点検・長文週4題・基礎問2周目／<b>英検2級 受験</b></li>
+      <li><b>1〜2月</b>：共テ過去問に初挑戦／進研模試／古文 文法完成→読解へ／社会 共テ演習開始</li>
+      <li><b>3月</b>：全科目 基礎総点検／共テ6割が見えるか確認</li>
+    </ul>
+  </div>
+
+  <h2 class="sec">フェーズ2の週型（高3前半）</h2>
+  <div class="week"><div class="wt">毎週まわす型</div>
+    <ul>
+      <li><b>月</b>単語＋リスニング ＋ ポレポレ ＋ 共テ数学</li>
+      <li><b>火</b>単語 ＋ 長文 Rules3〜4 ＋ 開発講座</li>
+      <li><b>水</b>単語＋リスニング ＋ 英作文（添削提出）＋ 古文上達／漢文</li>
+      <li><b>木</b>単語 ＋ ポレポレ ＋ 社会 共テ演習</li>
+      <li><b>金</b>単語＋リスニング ＋ 長文 ＋ 共テ数学</li>
+      <li><b>土</b>総合問題 過去問1題＋添削 ＋ 社会</li>
+      <li><b>日</b>復習日（＋模試の復習）</li>
+    </ul>
+  </div>
+  <div class="blocks"><div class="bt">2週ごとのブロック目標</div>
+    <ul>
+      <li><b>4月</b>：ポレポレ1〜30／Rules3開始／英作文 例文暗記→和文英訳／共テ数学 大問別</li>
+      <li><b>5月</b>：ポレポレ1周／Rules4／河合全統（5月）／早慶長文 週4題／自由英作</li>
+      <li><b>6月</b>：総合問題 着手（週1）／漢文集中／共テ数学8割練習／<b>準1級 受験</b></li>
+      <li><b>7月</b>：共テ演習量UP／総合問題の添削サイクル確立／進研＋河合全統（夏）</li>
+    </ul>
+  </div>
+
+  <h2 class="sec">フェーズ3の週型（高3夏〜秋）</h2>
+  <div class="week"><div class="wt">毎週まわす型（午前／午後）</div>
+    <ul>
+      <li><b>月</b>共テ数ⅠA ／ 早慶長文＋単語維持</li>
+      <li><b>火</b>総合問題 過去問1年分(120分) ／ 添削提出＋復習</li>
+      <li><b>水</b>共テ国語 ／ 英作文＋社会一問一答</li>
+      <li><b>木</b>共テ社会 ／ 早慶長文＋解釈復習</li>
+      <li><b>金</b>総合問題 英語長文・図表トレ ／ 共テ数学</li>
+      <li><b>土</b>過去問 or 模試の通し演習 ／ 解き直し</li>
+      <li><b>日</b>復習日（全科目の失点分析）</li>
+    </ul>
+  </div>
+  <div class="blocks"><div class="bt">2週ごとのブロック目標</div>
+    <ul>
+      <li><b>8月</b>：総合問題を古い年度から順に／共テ全科目 週1セット／添削で記述精度UP</li>
+      <li><b>9月</b>：共テ8割を外さない演習／総合問題 直近年度／<b>早大型 冠模試</b></li>
+      <li><b>10月</b>：総合問題の時間配分 最適化／共テ予想問題／河合全統（秋）</li>
+    </ul>
+  </div>
+
+  <h2 class="sec">フェーズ4の週型（直前期）</h2>
+  <div class="week"><div class="wt">毎週まわす型</div>
+    <ul>
+      <li><b>月〜金</b>共テ予想問題を1日1〜2科目 通し＋即日復習</li>
+      <li><b>土</b>総合問題 120分実戦＋記述添削</li>
+      <li><b>日</b>1週間の失点パターン分析＋弱点補強</li>
+    </ul>
+  </div>
+  <div class="blocks"><div class="bt">進行目標</div>
+    <ul>
+      <li><b>11月</b>：共テ予想パック週1／総合問題 週1で時間制限演習</li>
+      <li><b>12月</b>：共テ演習を増やし安定化 → 後半は本番モード（時間・休憩込み）</li>
+      <li><b>1月中旬</b>：<b>共通テスト本番</b> → 下旬〜2月は総合問題に全振り → <b>独自試験 本番</b></li>
+    </ul>
+  </div>
+  <div class="note">この計画は模試の結果で必ずズレる。型は崩さず中身を入れ替える。各フェーズに入る時に、その月を1週ごとに割り直すと精度が上がる（その時はまた一緒に作ろう）。</div>
+</section>
+
+<!-- ================= VIEW: ROUTE ================= -->
+<section class="view" id="v-route">
+  <div class="note">凡例：<b>P0〜P4</b>＝フェーズ。1冊を完璧に2〜3周、順番厳守。終わってないのに次へ進まない。</div>
+  <div class="card">
+    <details open>
+      <summary>🇬🇧 英語（最優先・波及効果 最大）<span class="chev">▶</span></summary>
+      <div class="body">
+        <div class="subj en"><span class="sname">単語</span><div class="mat">シス単 or ターゲット1900｜1日100語・毎日<span class="goal">見て1秒で意味｜P0〜継続</span></div><div class="mat" style="margin-top:6px">上乗せ：速単上級 or パス単準1｜1日50語<span class="goal">早慶語彙｜P2〜</span></div></div>
+        <div class="subj en"><span class="sname">文法</span><div class="mat">大岩の英文法｜2〜3週で1周<span class="goal">中学〜高1の穴埋め｜P0</span></div><div class="mat" style="margin-top:6px">Vintage／Next Stage｜1冊3周<span class="goal">文法・語法を演習で固める｜P1〜2</span></div></div>
+        <div class="subj en"><span class="sname">解釈</span><div class="mat">入門解釈70 → 基礎解釈100 → ポレポレ（or 透視図）<span class="goal">長文が読めない原因はここ。1日2〜3題ずつ｜P0→P1→P2</span></div></div>
+        <div class="subj en"><span class="sname">長文</span><div class="mat">The Rules 1→2（週3〜4題）→ 3→4 or やっておきたい500→700（音読復習）<span class="goal">標準→早慶レベル｜P1〜3</span></div></div>
+        <div class="subj en"><span class="sname">英作文</span><div class="mat">大矢実況中継 or 竹岡｜1日1テーマ＋添削<span class="goal">総合問題で英作文が出る→必須｜P2〜3</span></div></div>
+        <div class="subj en"><span class="sname">リスニング</span><div class="mat">きめる!共テL＋毎日音声15〜20分<span class="goal">共テL8割｜P2〜4</span></div></div>
+        <p><b>到達目標：</b>共テR/L 8.5割／早慶長文を読み切る／英作文が書ける</p>
+      </div>
+    </details>
+  </div>
+  <div style="height:10px"></div>
+  <div class="card">
+    <details>
+      <summary>🧮 数Ⅰ・A（必須・共テ8割）<span class="chev">▶</span></summary>
+      <div class="body">
+        <div class="subj"><span class="sname">基礎</span><div class="mat">やさしい高校数学ⅠA｜つまずき単元を集中<span class="goal">教科書レベルの穴埋め｜P0</span></div></div>
+        <div class="subj"><span class="sname">典型</span><div class="mat">基礎問題精講ⅠA｜1日5問・反復<span class="goal">典型問題を解ける｜P1</span></div></div>
+        <div class="subj"><span class="sname">実戦</span><div class="mat">きめる!共テ数学＋過去問｜週2〜3セット<span class="goal">時間内に8割｜P2〜4</span></div></div>
+        <p>⚠️「データの分析」は丁寧に（総合問題の図表読み取りに直結）。数ⅡBCは政経には不要。</p>
+      </div>
+    </details>
+  </div>
+  <div style="height:10px"></div>
+  <div class="card">
+    <details>
+      <summary>📖 国語（共テ8割・記述は総合問題に直結）<span class="chev">▶</span></summary>
+      <div class="body">
+        <div class="subj"><span class="sname">現代文</span><div class="mat">ことばはちからJr → アクセス基本編（週3題）→ 開発講座（週2題・記述強化）→ 共テ演習<span class="goal">P0→P1→P2→P3〜4</span></div></div>
+        <div class="subj"><span class="sname">古文</span><div class="mat">古文単語315（毎日スキマ）→ 富井の古典文法 → 古文上達45（週3題）→ 共テ演習<span class="goal">P0→P1→P2→P3〜4</span></div></div>
+        <div class="subj"><span class="sname">漢文</span><div class="mat">漢文早覚え速答法｜2〜3週で集中<span class="goal">共テ漢文を短期攻略｜P2</span></div></div>
+      </div>
+    </details>
+  </div>
+  <div style="height:10px"></div>
+  <div class="card">
+    <details>
+      <summary>🌏 社会＝歴史公民（武器・共テ9割）<span class="chev">▶</span></summary>
+      <div class="body">
+        <p>まず共テで使う1科目を確定（世界史探究／日本史探究／政治・経済など）。</p>
+        <div class="subj"><span class="sname">理解</span><div class="mat">通史・分野本（蔭山の政経／ナビゲーター世界史／実況中継 日本史 等）｜高2中に1周<span class="goal">P1</span></div></div>
+        <div class="subj"><span class="sname">暗記</span><div class="mat">東進一問一答｜毎日反復（早稲田志望は低頻度語まで）<span class="goal">P1〜継続</span></div></div>
+        <div class="subj"><span class="sname">演習</span><div class="mat">用語集＝常時参照／共テ過去問・予想で9割を外さない<span class="goal">P3〜4</span></div></div>
+        <p>政経選択なら時事＋用語集が鍵。ニュース習慣は総合問題にも効く。</p>
+      </div>
+    </details>
+  </div>
+  <div style="height:10px"></div>
+  <div class="card">
+    <details>
+      <summary>🏛 総合問題（独自100点・高3夏から本格化）<span class="chev">▶</span></summary>
+      <div class="body">
+        <p><b>形式：</b>120分で日本語長文・英語長文・英作文の3題。統計図表・データ分析・推論・論述。日英の情報を統合して考える力が核心。</p>
+        <div class="subj"><span class="sname">主教材</span><div class="mat">公式サンプル＋過去問（河合塾の解答例も活用）｜P2で眺める→P3で年度順→P4で120分実戦</div></div>
+        <div class="subj"><span class="sname">土台</span><div class="mat">英語ルート（長文＋英作文）／開発講座の記述／数ⅠA「データの分析」／社会の背景知識＋時事<span class="goal">全部ここに合流する</span></div></div>
+        <p>⚠️ 記述は<b>必ず第三者の添削</b>（学校の先生・塾）。独学で点数化しづらい唯一の領域。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= VIEW: RULE ================= -->
+<section class="view" id="v-rule">
+  <h2 class="sec">目標スコア（200点満点・8割）</h2>
+  <div class="score">
+    <div class="row"><span class="nm">国語（共テ）</span><span class="bar"><i style="width:84%"></i></span><span class="pt">21/25</span></div>
+    <div class="row"><span class="nm">英語（共テ）</span><span class="bar"><i style="width:88%"></i></span><span class="pt">22/25</span></div>
+    <div class="row"><span class="nm">数ⅠA（必須）</span><span class="bar"><i style="width:80%"></i></span><span class="pt">20/25</span></div>
+    <div class="row"><span class="nm">歴史公民（武器）</span><span class="bar"><i style="width:92%"></i></span><span class="pt">23/25</span></div>
+    <div class="row"><span class="nm">総合問題（独自）</span><span class="bar"><i style="width:74%"></i></span><span class="pt">74/100</span></div>
+    <div class="row"><span class="nm">合計</span><span class="bar"><i style="width:80%"></i></span><span class="pt">160/200</span></div>
+  </div>
+  <div class="note">柱：共テで稼ぎ（86）、総合問題は7割台で固める（74）。社会9割超で全体を底上げ。</div>
+
+  <h2 class="sec">現在地とギャップ</h2>
+  <ol class="rule">
+    <li><b>英語 48</b> → 進研65〜70へ（最優先で立て直し）</li>
+    <li><b>国語 48</b> → 進研65〜70へ（読解力が全科目に波及）</li>
+    <li><b>数学 48</b> → 数ⅠAで共テ8割（基礎から）</li>
+    <li><b>社会 約60（推定）</b> → 共テ9割（強み・要実測）</li>
+  </ol>
+  <div class="note">進研は河合・駿台より高めに出る。高3では必ず河合全統で「本当の現在地」を測る。判定より弱点発見ツールとして使う——E判定が続いても、潰す穴が見えていれば前進している。</div>
+
+  <h2 class="sec">検定の方針</h2>
+  <div class="kentei">
+    <div class="k"><b class="no">漢検 → やらない。</b>早慶一般で不使用・時間対効果が低い。</div>
+    <div class="k"><b class="no">数検 → やらない。</b>数ⅠAは共テ過去問で直接叩く方が速い。</div>
+    <div class="k"><b class="yes">英検 → 使う。</b>到達度マーカー＋併願保険。高2で2級 → 高3前半で準1級挑戦。早稲田他学部の4技能利用の保険にもなる。</div>
+  </div>
+
+  <h2 class="sec">模試カレンダー</h2>
+  <ol class="rule">
+    <li><b>2026年7月</b> 進研（現在地測定・英国数50前後）</li>
+    <li><b>2026年11月・2027年1月</b> 進研（53→57〜60）</li>
+    <li><b>2027年5〜7月</b> 進研＋河合全統（60〜63）</li>
+    <li><b>2027年8〜10月</b> 河合全統＋早大型冠模試（63〜67）</li>
+    <li><b>2027年11月〜</b> 共通テスト模試（67〜・社会9割）</li>
+  </ol>
+
+  <h2 class="sec">絶対ルール</h2>
+  <ol class="rule">
+    <li><b>1冊を完璧に、2〜3周。</b>薄く広くは厳禁。最大の敵は「やった気」。</li>
+    <li><b>英語は毎日。</b>単語・解釈・長文を途切れさせない。</li>
+    <li><b>順番厳守。</b>早慶レベル教材は高3前半以降。土台なしで難問に行くと時間が溶ける。</li>
+    <li>終わった教材は復習用に残す。捨てない。</li>
+    <li>模試のたびに計画を更新。速ければ前倒し、遅れたら★を絞って基礎優先。</li>
+  </ol>
+
+  <div class="note">⚠️ 配点・科目・英検の扱いは、2028年度の正式な「入学者選抜要項／学生募集要項」公表後に必ず最終確認。教材は最新版（改訂版）を選び、合わなければ同レベルの別教材に差し替えOK。</div>
+</section>
+
+</main>
+<footer>KOROTA'S ROAD TO WASEDA ｜ 2026.6 → 2028.2<br>チェックの進捗はこの端末に自動保存される</footer>
+
+<script>
+// ---- countdown (共テ想定: 2028-01-15) ----
+const exam = new Date('2028-01-15T00:00:00+09:00');
+const now = new Date();
+const days = Math.max(0, Math.ceil((exam - now) / 86400000));
+document.getElementById('dDays').textContent = days;
+document.getElementById('dWeeks').textContent = Math.floor(days / 7);
+
+// ---- current phase detection ----
+const phases = [
+  {i:0, from:'2026-06-01', to:'2026-08-31', name:'フェーズ0：基礎立て直し（高2の夏）',
+   todo:'英単語100/日・大岩文法・入門解釈70・やさしい数ⅠA・現代文入門・古文単語。教材はこれだけ、広げない。'},
+  {i:1, from:'2026-09-01', to:'2027-03-31', name:'フェーズ1：基礎完成（高2後半）',
+   todo:'Vintage・基礎解釈100・The Rules1→2・基礎問精講ⅠA・通史一周・英検2級。'},
+  {i:2, from:'2027-04-01', to:'2027-07-31', name:'フェーズ2：早慶レベルへ（高3前半）',
+   todo:'ポレポレ・Rules3→4・英作文＋添削・共テ演習・総合問題に着手・準1級挑戦。'},
+  {i:3, from:'2027-08-01', to:'2027-10-31', name:'フェーズ3：総合問題 本格化（高3夏秋）',
+   todo:'総合問題を年度順に演習＋添削。共テ8割を安定させる。'},
+  {i:4, from:'2027-11-01', to:'2028-01-14', name:'フェーズ4：仕上げ（直前期）',
+   todo:'共テ予想問題を週で回す。総合問題は120分の時間制限で実戦。'},
+  {i:5, from:'2028-01-15', to:'2028-02-29', name:'本番！',
+   todo:'積んできたものを全部出す。共テ後は総合問題に全振り。'}
+];
+const cur = phases.find(p => now >= new Date(p.from+'T00:00:00+09:00') && now <= new Date(p.to+'T23:59:59+09:00')) || phases[0];
+document.getElementById('nowPhase').textContent = cur.name;
+document.getElementById('nowTodo').textContent = cur.todo;
+document.querySelectorAll('.stage').forEach(s=>{
+  if(+s.dataset.phase === cur.i){
+    s.classList.add('here');
+    const sum = s.querySelector('summary > span');
+    const b = document.createElement('span'); b.className='here-badge'; b.textContent='いまここ';
+    sum.prepend(b); sum.prepend(document.createElement('br')); sum.prepend(b);
+    s.querySelector('details').open = true;
+  }
+});
+
+// ---- highlight current week in F0 ----
+document.querySelectorAll('#f0weeks li').forEach(li=>{
+  const [a,b] = li.dataset.range.split(',');
+  if(now >= new Date(a+'T00:00:00+09:00') && now <= new Date(b+'T23:59:59+09:00')){
+    li.style.background='#FDECEF'; li.style.borderRadius='8px'; li.style.padding='6px 10px';
+    li.innerHTML = '📍 ' + li.innerHTML;
+  }
+});
+
+// ---- tabs ----
+document.querySelectorAll('nav button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById('v-'+btn.dataset.v).classList.add('on');
+    window.scrollTo({top:0});
+  });
+});
+
+// ---- checkbox persistence (localStorage) ----
+const LS = 'seikei-road-checks';
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(LS) || '{}'); } catch(e){ saved = {}; }
+document.querySelectorAll('.checks input').forEach(cb=>{
+  if (saved[cb.dataset.k]) cb.checked = true;
+  cb.addEventListener('change',()=>{
+    saved[cb.dataset.k] = cb.checked;
+    try { localStorage.setItem(LS, JSON.stringify(saved)); } catch(e){}
+  });
+});
+
+// ---- PWA: service worker ----
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
